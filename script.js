@@ -245,16 +245,17 @@ function updateLives() {
 
 
 function updateHangman() {
-    const parts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
-    
-    const wrongOrder = ['head', 'leftArm', 'rightArm', 'body', 'leftLeg', 'rightLeg'];
+  
+    const order = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
+
     const partIndex = gameState.wrongGuesses - 1;
-    
-    if (partIndex >= 0 && partIndex < wrongOrder.length) {
-        const partToShow = wrongOrder[partIndex];
+
+    if (partIndex >= 0 && partIndex < order.length) {
+        const partToShow = order[partIndex];
         document.getElementById(partToShow).style.display = 'block';
     }
 }
+
 
 function resetHangman() {
     const parts = ['head', 'body', 'leftArm', 'rightArm', 'leftLeg', 'rightLeg'];
