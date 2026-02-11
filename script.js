@@ -22,17 +22,29 @@ let wordBank = [];
 document.addEventListener('DOMContentLoaded', function() {
     loadWordBank();
     generateKeyboard();
+
+  const savedTheme = localStorage.getItem('theme');
+  const themeIcon = document.querySelector('.theme-icon');
+
+  if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeIcon.textContent = '☀️';
+  } else {
+    document.body.classList.remove('dark-mode');
+    themeIcon.textContent = '🌙';
+  }
 });
 
+
 function toggleTheme() {
-    const themeIcon = document.querySelector('.theme-icon');
-    
-    if (themeIcon.textContent === '🌙') {
-        themeIcon.textContent = '☀️';
-    } else {
-        themeIcon.textContent = '🌙';
-    }
+  const themeIcon = document.querySelector('.theme-icon');
+  document.body.classList.toggle('dark-mode');
+
+  const isDark = document.body.classList.contains('dark-mode');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  themeIcon.textContent = isDark ? '☀️' : '🌙';
 }
+
 
 function switchTab(tabName) {
     const tabs = document.querySelectorAll('.tab-content');
@@ -211,13 +223,10 @@ function guessLetter(letter) {
     }
     
     gameState.guessedLetters.push(letter);
- bugfix/gm-wrong-guesses-display
     const btn = document.getElementById('key-' + letter);
     if (btn) btn.disabled = true;
 
     document.getElementById('key-' + letter).disabled = true;
-
-main
     
     if (!gameState.currentWord.includes(letter)) {
         gameState.wrongGuesses++;
@@ -357,11 +366,6 @@ function gameWon() {
 function gameLost() {
     gameState.gameActive = false;
 
- bugfix/gm-correct-letter-display
-  
-
-    
-main
     const loserName = gameState.currentPlayer === 1 ?
         gameState.player1.name : gameState.player2.name;
 
@@ -371,11 +375,6 @@ main
     statusMsg.textContent = `😢 ${loserName} lost! The word was: ${gameState.currentWord}`;
     statusDiv.classList.add('show', 'loser');
 
-bugfix/gm-correct-letter-display
-  
-
-    
-main
     gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
     updateCurrentPlayer();
 }
