@@ -95,6 +95,11 @@ function addWord() {
     const input = document.getElementById('newWord');
     const word = input.value.trim().toUpperCase();
 
+    if (!/^[A-Z]+$/.test(word)) {
+        alert('Word must contain letters only (A-Z).');
+        return;
+      }
+      
     wordBank.push(word);
     input.value = '';
     saveWordBank();
@@ -103,6 +108,12 @@ function addWord() {
 
 function editWord(index) {
     const newWord = prompt('Edit word:', wordBank[index]);
+
+    if (!/^[A-Z]+$/.test(word)) {
+        alert('Word must contain letters only (A-Z).');
+        return;
+      }
+      
     if (newWord) {
         wordBank.splice(index, 1);
         saveWordBank();
@@ -315,7 +326,11 @@ function gameWon() {
 function gameLost() {
     gameState.gameActive = false;
 
+ bugfix/gm-correct-letter-display
   
+
+    
+main
     const loserName = gameState.currentPlayer === 1 ?
         gameState.player1.name : gameState.player2.name;
 
@@ -325,7 +340,11 @@ function gameLost() {
     statusMsg.textContent = `😢 ${loserName} lost! The word was: ${gameState.currentWord}`;
     statusDiv.classList.add('show', 'loser');
 
+bugfix/gm-correct-letter-display
   
+
+    
+main
     gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
     updateCurrentPlayer();
 }
