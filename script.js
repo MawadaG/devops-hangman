@@ -189,6 +189,8 @@ function guessLetter(letter) {
     }
     
     gameState.guessedLetters.push(letter);
+    document.getElementById('key-' + letter).disabled = true;
+
     
     if (!gameState.currentWord.includes(letter)) {
         gameState.wrongGuesses++;
@@ -324,7 +326,11 @@ function gameWon() {
 function gameLost() {
     gameState.gameActive = false;
 
+ bugfix/gm-correct-letter-display
+  
+
     
+main
     const loserName = gameState.currentPlayer === 1 ?
         gameState.player1.name : gameState.player2.name;
 
@@ -334,7 +340,11 @@ function gameLost() {
     statusMsg.textContent = `😢 ${loserName} lost! The word was: ${gameState.currentWord}`;
     statusDiv.classList.add('show', 'loser');
 
+bugfix/gm-correct-letter-display
+  
+
     
+main
     gameState.currentPlayer = gameState.currentPlayer === 1 ? 2 : 1;
     updateCurrentPlayer();
 }
