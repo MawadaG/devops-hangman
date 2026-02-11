@@ -98,8 +98,13 @@ function addWord() {
     if (!/^[A-Z]+$/.test(word)) {
         alert('Word must contain letters only (A-Z).');
         return;
-      }
-      
+    }
+    
+    if (wordBank.includes(word)) {
+        alert('Duplicate word is not allowed.');
+        return;
+    }
+
     wordBank.push(word);
     input.value = '';
     saveWordBank();
@@ -112,8 +117,13 @@ function editWord(index) {
     if (!/^[A-Z]+$/.test(word)) {
         alert('Word must contain letters only (A-Z).');
         return;
-      }
-      
+    }
+    
+    if (wordBank.includes(word) && wordBank[index] !== word) {
+        alert('Duplicate word is not allowed.');
+        return;
+    }
+  
     if (newWord) {
         wordBank.splice(index, 1);
         saveWordBank();
