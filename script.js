@@ -95,6 +95,12 @@ function addWord() {
     const input = document.getElementById('newWord');
     const word = input.value.trim().toUpperCase();
 
+    if (word.length === 0) {
+        alert('Word cannot be empty.');
+        return;
+    }
+
+
     if (!/^[A-Z]+$/.test(word)) {
         alert('Word must contain letters only (A-Z).');
         return;
@@ -113,6 +119,12 @@ function addWord() {
 
 function editWord(index) {
     const newWord = prompt('Edit word:', wordBank[index]);
+
+    if (word.length === 0) {
+        alert('Word cannot be empty.');
+        return;
+    }
+
 
     if (!/^[A-Z]+$/.test(word)) {
         alert('Word must contain letters only (A-Z).');
