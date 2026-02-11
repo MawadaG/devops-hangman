@@ -189,8 +189,13 @@ function guessLetter(letter) {
     }
     
     gameState.guessedLetters.push(letter);
+ bugfix/gm-wrong-guesses-display
+    const btn = document.getElementById('key-' + letter);
+    if (btn) btn.disabled = true;
+
     document.getElementById('key-' + letter).disabled = true;
 
+main
     
     if (!gameState.currentWord.includes(letter)) {
         gameState.wrongGuesses++;
@@ -220,16 +225,18 @@ function updateWordDisplay() {
 
 function updateWrongLetters() {
     const wrongLettersDiv = document.getElementById('wrongLetters');
-    const wrong = gameState.guessedLetters.filter(letter => 
+
+    const wrong = gameState.guessedLetters.filter(letter =>
         !gameState.currentWord.includes(letter)
     );
-    
+
     if (wrong.length === 0) {
         wrongLettersDiv.textContent = 'None yet';
     } else {
-        wrongLettersDiv.textContent = gameState.guessedLetters.join(', ');
+        wrongLettersDiv.textContent = wrong.join(', ');
     }
 }
+
 
 function updateLives() {
     const livesLeft = gameState.maxWrong - gameState.wrongGuesses + 1;
